@@ -29,7 +29,7 @@ import { red } from '@mui/material/colors';
 
 function App() {
   const [open, setOpen] = React.useState(false);
-  const [name, setName] = React.useState("Web Developer");
+  const [name, setName] = React.useState("Full Stack Web App Developer");
 
   const skills = [
     { name: 'C', proficiency: 75 }, // 80% proficient
@@ -46,7 +46,19 @@ function App() {
     
   ];
 
- 
+  let currentIndex = 0
+  const designation = ["Full Stack Web App Developer","React Full Stack Developer",
+                       "MERN Stack Developer","Java Developer","Android App Developer"]
+
+  React.useEffect(()=>{
+    const intervalId = setInterval(()=>{
+      setName(designation[currentIndex])
+      currentIndex = (currentIndex + 1)%(designation.length)
+    },2000)
+    //clean the interval when components did unmount
+    return () => clearInterval(intervalId)
+  },[])
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -134,7 +146,7 @@ function App() {
             variant="h6"
            sx={{fontWeight: 'normal',paddingLeft:1, color:'black',padding:1}}
           >          
-          A passionate <span style={{color:"red",fontWeight:"bold"}}>{name}</span>  based in Pune. With over 2 years of experience in crafting
+          A passionate <span style={{color:"red",fontWeight:"bold"}}>{name}</span> <br/> based in Pune. With over 2 years of experience in crafting
            responsive, user-friendly, and innovative websites, I've always been drawn to the 
            intricate art of turning code into captivating user experiences.
           </Typography>
